@@ -17,7 +17,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         let childView = ChildTableView()
         childView.alertDelegate = self
-        self.view = childView
+        view = childView
     }
 }
 

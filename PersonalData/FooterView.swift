@@ -19,10 +19,10 @@ class FooterView: UIView {
     }
     
     func setupConstraints(){
-        topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor).isActive = true
-        bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor).isActive = true
+        bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor).isActive = true
         heightAnchor.constraint(equalToConstant: 50).isActive = true
-        leftAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leftAnchor).isActive = true
-        rightAnchor.constraint(equalTo: self.safeAreaLayoutGuide.rightAnchor).isActive = true
+        leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor).isActive = true
+        rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor).isActive = true
     }
 }

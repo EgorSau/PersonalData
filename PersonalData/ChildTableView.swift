@@ -124,54 +124,54 @@ class ChildTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
     
     private func setupConstraints(){
         //MARK: HeaderView
-        self.addSubview(headerView)
-        headerView.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
+        addSubview(headerView)
+        headerView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
 
         //MARK: TopLabel
-        self.headerView.addSubview(topLabel)
-        topLabel.topAnchor.constraint(equalTo: self.headerView.topAnchor).isActive = true
+        headerView.addSubview(topLabel)
+        topLabel.topAnchor.constraint(equalTo: headerView.topAnchor).isActive = true
         topLabel.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        topLabel.leftAnchor.constraint(equalTo: self.headerView.leftAnchor, constant: 16).isActive = true
-        topLabel.rightAnchor.constraint(equalTo: self.headerView.rightAnchor, constant: -16).isActive = true
+        topLabel.leftAnchor.constraint(equalTo: headerView.leftAnchor, constant: 16).isActive = true
+        topLabel.rightAnchor.constraint(equalTo: headerView.rightAnchor, constant: -16).isActive = true
 
         //MARK: NameTextField
-        self.headerView.addSubview(nameTextField)
-        nameTextField.topAnchor.constraint(equalTo: self.topLabel.bottomAnchor, constant: 10).isActive = true
+        headerView.addSubview(nameTextField)
+        nameTextField.topAnchor.constraint(equalTo: topLabel.bottomAnchor, constant: 10).isActive = true
         nameTextField.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        nameTextField.leftAnchor.constraint(equalTo: self.headerView.leftAnchor, constant: 16).isActive = true
-        nameTextField.rightAnchor.constraint(equalTo: self.headerView.rightAnchor, constant: -16).isActive = true
+        nameTextField.leftAnchor.constraint(equalTo: headerView.leftAnchor, constant: 16).isActive = true
+        nameTextField.rightAnchor.constraint(equalTo: headerView.rightAnchor, constant: -16).isActive = true
         
         //MARK: AgeTextField
-        self.headerView.addSubview(ageTextField)
-        ageTextField.topAnchor.constraint(equalTo: self.nameTextField.bottomAnchor, constant: 10).isActive = true
+        headerView.addSubview(ageTextField)
+        ageTextField.topAnchor.constraint(equalTo: nameTextField.bottomAnchor, constant: 10).isActive = true
         ageTextField.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        ageTextField.leftAnchor.constraint(equalTo: self.headerView.leftAnchor, constant: 16).isActive = true
-        ageTextField.rightAnchor.constraint(equalTo: self.headerView.rightAnchor, constant: -16).isActive = true
+        ageTextField.leftAnchor.constraint(equalTo: headerView.leftAnchor, constant: 16).isActive = true
+        ageTextField.rightAnchor.constraint(equalTo: headerView.rightAnchor, constant: -16).isActive = true
 
         //MARK: AddButtons
-        self.headerView.addSubview(addButton)
-        addButton.topAnchor.constraint(equalTo: self.ageTextField.bottomAnchor, constant: 10).isActive = true
+        headerView.addSubview(addButton)
+        addButton.topAnchor.constraint(equalTo: ageTextField.bottomAnchor, constant: 10).isActive = true
         addButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        addButton.leftAnchor.constraint(equalTo: self.headerView.rightAnchor, constant: -250).isActive = true
-        addButton.rightAnchor.constraint(equalTo: self.headerView.rightAnchor, constant: -16).isActive = true
+        addButton.leftAnchor.constraint(equalTo: headerView.rightAnchor, constant: -250).isActive = true
+        addButton.rightAnchor.constraint(equalTo: headerView.rightAnchor, constant: -16).isActive = true
         
         //MARK: BottomLabel
-        self.headerView.addSubview(bottomLabel)
-        bottomLabel.topAnchor.constraint(equalTo: self.ageTextField.bottomAnchor, constant: 10).isActive = true
+        headerView.addSubview(bottomLabel)
+        bottomLabel.topAnchor.constraint(equalTo: ageTextField.bottomAnchor, constant: 10).isActive = true
         bottomLabel.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        bottomLabel.leftAnchor.constraint(equalTo: self.headerView.leftAnchor, constant: 16).isActive = true
+        bottomLabel.leftAnchor.constraint(equalTo: headerView.leftAnchor, constant: 16).isActive = true
 
         //MARK: FooterView
-        self.addSubview(footerView)
+        addSubview(footerView)
         footerView.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor).isActive = true
         footerView.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor).isActive = true
         footerView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor).isActive = true
         footerView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
         
         //MARK: ClearButtons
-        self.footerView.addSubview(clearButton)
-        clearButton.topAnchor.constraint(equalTo: self.footerView.topAnchor).isActive = true
-        clearButton.bottomAnchor.constraint(equalTo: self.footerView.bottomAnchor).isActive = true
+        footerView.addSubview(clearButton)
+        clearButton.topAnchor.constraint(equalTo: footerView.topAnchor).isActive = true
+        clearButton.bottomAnchor.constraint(equalTo: footerView.bottomAnchor).isActive = true
         clearButton.widthAnchor.constraint(equalToConstant: 250).isActive = true
         clearButton.centerXAnchor.constraint(equalTo: footerView.centerXAnchor).isActive = true
     }
@@ -233,24 +233,17 @@ class ChildTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
 }
 
 extension ChildTableView: ChildTableDelegate {
-//    func deleteRow(withTag: Int, inArray: [Int]) -> Int {
     func deleteRow(withTag: Int){
-//        var tempIndex: Int = 5
         tableArray.enumerated().forEach { index, tag in
             if tag == withTag {
                 DispatchQueue.main.async {
                     self.cellCounter.removeFirst()
-                    if self.tableArray.isEmpty == false {
-                        self.tableArray.remove(at: index)
-                    }
                     self.beginUpdates()
+                    self.tableArray.remove(at: index)
                     self.deleteRows(at: [IndexPath(row: index, section: 0)], with: .fade)
-//                    print("DELETED: \(IndexPath(row: index, section: 0))")
                     self.endUpdates()
-//                    tempIndex = index
                 }
             }
         }
-//        return tempIndex
     }
 }

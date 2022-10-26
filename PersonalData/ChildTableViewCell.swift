@@ -8,7 +8,6 @@
 import UIKit
 
 protocol ChildTableDelegate {
-//    func deleteRow(withTag: Int, inArray: [Int]) -> Int
     func deleteRow(withTag: Int)
 }
 
@@ -75,53 +74,45 @@ class ChildTableViewCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        self.nameTextField.text = nil
-        self.ageTextField.text = nil
-//        self.cellArray.remove(at: self.tag)
-        self.tag = 0
+        nameTextField.text = nil
+        ageTextField.text = nil
+        tag = 0
     }
     
     @objc
     func deleteChild(){
-        self.delegateFromTable?.deleteRow(withTag: deleteButton.tag)
-//        guard let index = self.delegateFromTable?.deleteRow(withTag: deleteButton.tag, inArray: cellArray) else { return }
-//            if index == 5 {
-//                return
-//            } else {
-//                print("NOT COME HERE")
-//                self.cellArray.remove(at: index)
-//            }
+        delegateFromTable?.deleteRow(withTag: deleteButton.tag)
     }
     
-    func setupConstraints(){
+    private func setupConstraints(){
         
         //MARK: View
-        self.contentView.addSubview(cellView)
-        cellView.topAnchor.constraint(equalTo: self.contentView.topAnchor).isActive = true
-        cellView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor).isActive = true
-        cellView.leftAnchor.constraint(equalTo: self.contentView.leftAnchor).isActive = true
-        cellView.rightAnchor.constraint(equalTo: self.contentView.rightAnchor).isActive = true
+        contentView.addSubview(cellView)
+        cellView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
+        cellView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        cellView.leftAnchor.constraint(equalTo: contentView.leftAnchor).isActive = true
+        cellView.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
         
         //MARK: NameTextField
-        self.cellView.addSubview(nameTextField)
-        nameTextField.topAnchor.constraint(equalTo: self.cellView.topAnchor, constant: 10).isActive = true
+        cellView.addSubview(nameTextField)
+        nameTextField.topAnchor.constraint(equalTo: cellView.topAnchor, constant: 10).isActive = true
         nameTextField.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        nameTextField.leftAnchor.constraint(equalTo: self.cellView.leftAnchor, constant: 16).isActive = true
-        nameTextField.rightAnchor.constraint(equalTo: self.cellView.centerXAnchor).isActive = true
+        nameTextField.leftAnchor.constraint(equalTo: cellView.leftAnchor, constant: 16).isActive = true
+        nameTextField.rightAnchor.constraint(equalTo: cellView.centerXAnchor).isActive = true
         
         //MARK: AgeTextField
-        self.cellView.addSubview(ageTextField)
-        ageTextField.topAnchor.constraint(equalTo: self.nameTextField.bottomAnchor, constant: 10).isActive = true
+        cellView.addSubview(ageTextField)
+        ageTextField.topAnchor.constraint(equalTo: nameTextField.bottomAnchor, constant: 10).isActive = true
         ageTextField.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        ageTextField.leftAnchor.constraint(equalTo: self.cellView.leftAnchor, constant: 16).isActive = true
-        ageTextField.rightAnchor.constraint(equalTo: self.cellView.centerXAnchor).isActive = true
+        ageTextField.leftAnchor.constraint(equalTo: cellView.leftAnchor, constant: 16).isActive = true
+        ageTextField.rightAnchor.constraint(equalTo: cellView.centerXAnchor).isActive = true
         
         //MARK: Button
-        self.cellView.addSubview(deleteButton)
-        deleteButton.topAnchor.constraint(equalTo: self.cellView.topAnchor, constant: 10).isActive = true
+        cellView.addSubview(deleteButton)
+        deleteButton.topAnchor.constraint(equalTo: cellView.topAnchor, constant: 10).isActive = true
         deleteButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        deleteButton.leftAnchor.constraint(equalTo: self.cellView.rightAnchor, constant: -300).isActive = true
-        deleteButton.rightAnchor.constraint(equalTo: self.cellView.rightAnchor, constant: -16).isActive = true
+        deleteButton.leftAnchor.constraint(equalTo: cellView.rightAnchor, constant: -300).isActive = true
+        deleteButton.rightAnchor.constraint(equalTo: cellView.rightAnchor, constant: -16).isActive = true
     }
 }
 
