@@ -114,12 +114,12 @@ class ChildTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
     }
     
     private func setupSelf(){
-        self.delegate = self
-        self.dataSource = self
-        self.rowHeight = 130
-        self.estimatedRowHeight = 44
-        self.register(ChildTableViewCell.self, forCellReuseIdentifier: Names.childCell)
-        self.register(ChildTableViewCell.self, forCellReuseIdentifier: Names.defaultCell)
+        delegate = self
+        dataSource = self
+        rowHeight = 130
+        estimatedRowHeight = 44
+        register(ChildTableViewCell.self, forCellReuseIdentifier: Names.childCell)
+        register(ChildTableViewCell.self, forCellReuseIdentifier: Names.defaultCell)
     }
     
     private func setupConstraints(){
@@ -237,9 +237,13 @@ extension ChildTableView: ChildTableDelegate {
         tableArray.enumerated().forEach { index, tag in
             if tag == withTag {
                 DispatchQueue.main.async {
-                    self.cellCounter.removeFirst()
+                    if self.cellCounter.isEmpty == false {                    
+                        self.cellCounter.removeFirst()
+                    }
                     self.beginUpdates()
-                    self.tableArray.remove(at: index)
+                    if self.tableArray.isEmpty == false {
+                        self.tableArray.remove(at: index)
+                    }
                     self.deleteRows(at: [IndexPath(row: index, section: 0)], with: .fade)
                     self.endUpdates()
                 }
